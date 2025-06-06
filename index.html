@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Cafe Website</title>
+    <meta charset="UTF-8">
+    <title>Cafe Delight</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -9,71 +10,142 @@
             padding: 0;
         }
 
-        .banner {
+        header img {
             width: 100%;
-            height: 250px;
+            height: 300px;
             object-fit: cover;
         }
 
-        .menu-section {
-            padding: 20px;
-            background-color: #f7f7f7;
-        }
-
-        .menu-section h1, .menu-section h2 {
+        nav {
+            background-color: #333;
+            padding: 10px 0;
             text-align: center;
         }
 
-        .menu-list {
-            max-width: 600px;
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 30px 20px;
+        }
+
+        .about, .contact {
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .menu {
+            background-color: #f8f8f8;
+        }
+
+        .menu h2 {
+            text-align: center;
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
             margin: auto;
         }
 
-        .menu-list ul {
-            list-style-type: none;
-            padding: 0;
+        .menu-item {
+            background-color: white;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
         }
 
-        .menu-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid #ccc;
+        .gallery {
+            background-color: #f0f0f0;
+        }
+
+        .gallery h2 {
             text-align: center;
+        }
+
+        .gallery-images {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .gallery-images img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
         }
 
         footer {
             background-color: #333;
             color: white;
             text-align: center;
-            padding: 12px 0;
+            padding: 15px 0;
         }
     </style>
 </head>
 <body>
 
-    <!-- Banner Image -->
-    <img src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg" alt="Cafe Banner" class="banner">
+<header>
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836" alt="Cafe Banner">
+</header>
 
+<nav>
+    <a href="#about">About</a>
+    <a href="#menu">Menu</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+</nav>
 
-    <!-- Menu Section -->
-    <div class="menu-section">
-        <h1>Welcome to Our Cafe</h1>
-        <h2>Menu</h2>
-        <div class="menu-list">
-            <ul>
-                <li>Espresso - $3</li>
-                <li>Latte - $4</li>
-                <li>Cappuccino - $4.5</li>
-                <li>Mocha - $5</li>
-                <li>Sandwich - $6</li>
-                <li>Pastry - $3.5</li>
-            </ul>
-        </div>
+<section id="about" class="about">
+    <h2>About Our Cafe</h2>
+    <p>Welcome to Cafe Delight, a cozy spot to enjoy handcrafted coffee, delicious pastries, and light meals. 
+    Whether you're here for a quick bite or a relaxed hangout, we serve with warmth and style.</p>
+</section>
+
+<section id="menu" class="menu">
+    <h2>Our Menu</h2>
+    <div class="menu-items">
+        <div class="menu-item">☕ Espresso - $3</div>
+        <div class="menu-item">🥛 Latte - $4</div>
+        <div class="menu-item">🍫 Mocha - $4.5</div>
+        <div class="menu-item">🍵 Cappuccino - $4</div>
+        <div class="menu-item">🥪 Sandwich - $5.5</div>
+        <div class="menu-item">🧁 Cupcake - $2.5</div>
+        <div class="menu-item">🥐 Croissant - $3</div>
+        <div class="menu-item">🍰 Cheesecake - $4</div>
     </div>
+</section>
 
-    <!-- Footer -->
-    <footer>
-        © 2025 Cafe Delight. All rights reserved.
-    </footer>
+<section id="gallery" class="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery-images">
+        <img src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg" alt="Cafe 1">
+        <img src="https://images.pexels.com/photos/887850/pexels-photo-887850.jpeg" alt="Cafe 2">
+        <img src="https://images.pexels.com/photos/624015/pexels-photo-624015.jpeg" alt="Cafe 3">
+        <img src="https://images.pexels.com/photos/139991/pexels-photo-139991.jpeg" alt="Cafe 4">
+    </div>
+</section>
+
+<section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p>Email: cafedelight@example.com</p>
+    <p>Phone: +91-98765-43210</p>
+    <p>Location: 123 Coffee Street, Hyderabad, India</p>
+</section>
+
+<footer>
+    <p>© 2025 Cafe Delight. All rights reserved.</p>
+</footer>
 
 </body>
 </html>
