@@ -3,194 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delicious Bites Restaurant</title>
+    <title>TasteBuds Restaurant</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header Section -->
+
+    <!-- Navbar -->
     <header>
-        <div class="container">
-            <h1>Delicious Bites</h1>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#special-dishes">Specials</a></li>
-                    <li><a href="#menu">Menu</a></li>
-                    <li><a href="#testimonials">Reviews</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
+        <nav>
+            <div class="logo">TasteBuds</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-text">
-            <h2>Welcome to Delicious Bites</h2>
-            <p>Experience the taste of gourmet dishes made with love.</p>
-            <a href="#special-dishes" class="btn">Our Specials</a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2>About Us</h2>
-            <p>Delicious Bites has been serving exquisite dishes for over 10 years. Our chefs use the freshest ingredients to bring delightful flavors to your table.</p>
-            <img src="https://images.unsplash.com/photo-1555992336-03a23c2c9e87?crop=entropy&cs=tinysrgb&fit=max&h=400&w=700" alt="Restaurant Interior">
-        </div>
-    </section>
-
-    <!-- Special Dishes Section (Home) -->
-    <section id="special-dishes" class="special-dishes">
-        <div class="container">
-            <h2>Special Dishes</h2>
-            <div class="menu-items">
-                <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?crop=entropy&cs=tinysrgb&fit=max&h=200&w=300" alt="Italian Pasta">
-                    <h3>Italian Pasta - ₹250</h3>
-                    <button onclick="orderForm('Italian Pasta')">Order Now</button>
-                </div>
-                <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1562967916-eb82221dfb26?crop=entropy&cs=tinysrgb&fit=max&h=200&w=300" alt="Cheesy Burger">
-                    <h3>Cheesy Burger - ₹180</h3>
-                    <button onclick="orderForm('Cheesy Burger')">Order Now</button>
-                </div>
-                <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1604908177525-0b0277f212d0?crop=entropy&cs=tinysrgb&fit=max&h=200&w=300" alt="Chocolate Dessert">
-                    <h3>Chocolate Dessert - ₹120</h3>
-                    <button onclick="orderForm('Chocolate Dessert')">Order Now</button>
-                </div>
-            </div>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Welcome to TasteBuds</h1>
+            <p>Where taste meets the soul</p>
+            <a href="#menu" class="btn">Explore Menu</a>
         </div>
     </section>
 
     <!-- Menu Section -->
-    <section id="menu" class="menu">
-        <div class="container">
-            <h2>Our Menu</h2>
-            <div class="menu-items">
-                <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1594007653241-cd6ef2f6de4b?crop=entropy&cs=tinysrgb&fit=max&h=200&w=300" alt="Margherita Pizza">
-                    <h3>Margherita Pizza - ₹300</h3>
-                    <p>Classic pizza with fresh mozzarella and basil.</p>
-                    <button onclick="orderForm('Margherita Pizza')">Order Now</button>
-                </div>
-                <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?crop=entropy&cs=tinysrgb&fit=max&h=200&w=300" alt="Veg Sandwich">
-                    <h3>Veg Sandwich - ₹150</h3>
-                    <p>Fresh vegetables with crispy bread and sauces.</p>
-                    <button onclick="orderForm('Veg Sandwich')">Order Now</button>
-                </div>
-                <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1586190848857-3bfc1d0c3c2b?crop=entropy&cs=tinysrgb&fit=max&h=200&w=300" alt="Sushi Platter">
-                    <h3>Sushi Platter - ₹500</h3>
-                    <p>Assorted fresh sushi with wasabi and soy sauce.</p>
-                    <button onclick="orderForm('Sushi Platter')">Order Now</button>
-                </div>
-                <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?crop=entropy&cs=tinysrgb&fit=max&h=200&w=300" alt="Grilled Chicken">
-                    <h3>Grilled Chicken - ₹350</h3>
-                    <p>Juicy grilled chicken with herbs and spices.</p>
-                    <button onclick="orderForm('Grilled Chicken')">Order Now</button>
-                </div>
-                <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1604908177526-0b0277f212d0?crop=entropy&cs=tinysrgb&fit=max&h=200&w=300" alt="Fluffy Pancakes">
-                    <h3>Fluffy Pancakes - ₹180</h3>
-                    <p>Soft pancakes served with honey and fruits.</p>
-                    <button onclick="orderForm('Fluffy Pancakes')">Order Now</button>
-                </div>
-                <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?crop=entropy&cs=tinysrgb&fit=max&h=200&w=300" alt="Caesar Salad">
-                    <h3>Caesar Salad - ₹220</h3>
-                    <p>Crisp lettuce, parmesan cheese, and Caesar dressing.</p>
-                    <button onclick="orderForm('Caesar Salad')">Order Now</button>
-                </div>
-                <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1562967914-eb82221dfb26?crop=entropy&cs=tinysrgb&fit=max&h=200&w=300" alt="Chicken Tacos">
-                    <h3>Chicken Tacos - ₹200</h3>
-                    <p>Soft tacos filled with seasoned chicken and veggies.</p>
-                    <button onclick="orderForm('Chicken Tacos')">Order Now</button>
-                </div>
-                <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1617196039840-04870c3324e6?crop=entropy&cs=tinysrgb&fit=max&h=200&w=300" alt="Vanilla Ice Cream">
-                    <h3>Vanilla Ice Cream - ₹100</h3>
-                    <p>Creamy vanilla ice cream with chocolate sauce.</p>
-                    <button onclick="orderForm('Vanilla Ice Cream')">Order Now</button>
-                </div>
-                <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1598514984145-d278d2e946d5?crop=entropy&cs=tinysrgb&fit=max&h=200&w=300" alt="Veg Fried Rice">
-                    <h3>Veg Fried Rice - ₹180</h3>
-                    <p>Fried rice with mixed vegetables and light soy sauce.</p>
-                    <button onclick="orderForm('Veg Fried Rice')">Order Now</button>
-                </div>
-                <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1559561853-1c2554fa2e3d?crop=entropy&cs=tinysrgb&fit=max&h=200&w=300" alt="Beef Steak">
-                    <h3>Beef Steak - ₹550</h3>
-                    <p>Tender beef steak served with mashed potatoes.</p>
-                    <button onclick="orderForm('Beef Steak')">Order Now</button>
-                </div>
-                <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1606755962772-498b2e71f0f5?crop=entropy&cs=tinysrgb&fit=max&h=200&w=300" alt="Cold Coffee">
-                    <h3>Cold Coffee - ₹120</h3>
-                    <p>Refreshing cold coffee topped with whipped cream.</p>
-                    <button onclick="orderForm('Cold Coffee')">Order Now</button>
-                </div>
-                <div class="menu-item">
-                    <img src="https://images.unsplash.com/photo-1589308078050-2974c2b87271?crop=entropy&cs=tinysrgb&fit=max&h=200&w=300" alt="Pepperoni Pizza">
-                    <h3>Pepperoni Pizza - ₹350</h3>
-                    <p>Classic pepperoni pizza with melted cheese and sauce.</p>
-                    <button onclick="orderForm('Pepperoni Pizza')">Order Now</button>
-                </div>
+    <section id="menu">
+        <h2>Our Menu</h2>
+        <div class="filter-buttons">
+            <button onclick="filterMenu('all')">All</button>
+            <button onclick="filterMenu('starters')">Starters</button>
+            <button onclick="filterMenu('main')">Main Course</button>
+            <button onclick="filterMenu('desserts')">Desserts</button>
+        </div>
+
+        <div class="menu-items" id="menuList">
+            <div class="menu-item starters">
+                <img src="https://images.unsplash.com/photo-1604908177453-746295bf1ad9?auto=format&fit=crop&w=500&q=80" alt="Soup">
+                <h3>Tomato Soup</h3>
+                <p>Rich and creamy tomato soup.</p>
+            </div>
+            <div class="menu-item main">
+                <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?auto=format&fit=crop&w=500&q=80" alt="Pizza">
+                <h3>Cheese Pizza</h3>
+                <p>Cheesy goodness with fresh toppings.</p>
+            </div>
+            <div class="menu-item desserts">
+                <img src="https://images.unsplash.com/photo-1606756790138-24694cfd3f09?auto=format&fit=crop&w=500&q=80" alt="Cake">
+                <h3>Chocolate Cake</h3>
+                <p>Soft, moist, and full of chocolate flavor.</p>
+            </div>
+            <div class="menu-item main">
+                <img src="https://images.unsplash.com/photo-1604152135912-04a022e23696?auto=format&fit=crop&w=500&q=80" alt="Pasta">
+                <h3>Italian Pasta</h3>
+                <p>Fresh pasta with creamy Alfredo sauce.</p>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials">
-        <div class="container">
-            <h2>Customer Reviews</h2>
-            <div class="testimonial-cards">
-                <div class="testimonial-card">
-                    <p>"Amazing food and great service. Highly recommend!"</p>
-                    <h4>- Rahul</h4>
-                </div>
-                <div class="testimonial-card">
-                    <p>"The desserts are to die for! Will visit again."</p>
-                    <h4>- Priya</h4>
-                </div>
-                <div class="testimonial-card">
-                    <p>"Best pasta I've ever had. Excellent ambiance."</p>
-                    <h4>- Anil</h4>
-                </div>
-            </div>
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <h2>Our Ambience</h2>
+        <div class="gallery-images">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=500&q=80" alt="Cafe">
+            <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=500&q=80" alt="Table">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=500&q=80" alt="Dish">
+            <img src="https://images.unsplash.com/photo-1543353071-087092ec393e?auto=format&fit=crop&w=500&q=80" alt="Restaurant">
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Contact Us</h2>
-            <p>Email: contact@deliciousbites.com</p>
-            <p>Phone: +91 98765 43210</p>
-            <p>Address: 123 Food Street, Culinary City</p>
-            <form id="contactForm">
-                <input type="text" id="name" placeholder="Your Name" required>
-                <input type="email" id="email" placeholder="Your Email" required>
-                <textarea id="message" placeholder="Your Message" rows="4" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
-        </div>
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Email: tastebuds@example.com</p>
+        <p>Phone: +91 9876543210</p>
     </section>
 
-    <!-- Back to Top Button -->
-    <button id="backToTop" onclick="scrollToTop()">⬆️</button>
-
-    <!-- Footer Section -->
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Delicious Bites. All rights reserved.</p>
+        <p>&copy; 2025 TasteBuds Restaurant. All Rights Reserved.</p>
     </footer>
 
     <script src="script.js"></script>
