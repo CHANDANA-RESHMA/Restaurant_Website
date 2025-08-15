@@ -2,171 +2,39 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Restaurant Royale</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        scroll-behavior: smooth;
-    }
-    header img {
-        width: 100%;
-        height: 300px;
-        object-fit: cover;
-    }
-    nav {
-        background-color: #333;
-        padding: 10px 0;
-        text-align: center;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }
-    nav a {
-        color: white;
-        margin: 0 15px;
-        text-decoration: none;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    section {
-        padding: 30px 20px;
-    }
-    .about, .contact {
-        max-width: 800px;
-        margin: auto;
-        text-align: center;
-    }
-    .menu {
-        background-color: #f8f8f8;
-    }
-    .menu h2 {
-        text-align: center;
-    }
-    .menu-buttons {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    .menu-buttons button {
-        margin: 5px;
-        padding: 8px 15px;
-        border: none;
-        background-color: #333;
-        color: white;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    .menu-items {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-        max-width: 1000px;
-        margin: auto;
-    }
-    .menu-item {
-        background-color: white;
-        padding: 15px;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        text-align: center;
-    }
-    .gallery {
-        background-color: #f0f0f0;
-    }
-    .gallery h2 {
-        text-align: center;
-    }
-    .gallery-images {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-    }
-    .gallery-images img {
-        width: 200px;
-        height: 150px;
-        object-fit: cover;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: transform 0.3s;
-    }
-    .gallery-images img:hover {
-        transform: scale(1.05);
-    }
-    /* Modal for images */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 2000;
-        padding-top: 60px;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.8);
-    }
-    .modal-content {
-        margin: auto;
-        display: block;
-        max-width: 80%;
-        border-radius: 10px;
-    }
-    .modal-close {
-        position: absolute;
-        top: 20px;
-        right: 35px;
-        color: white;
-        font-size: 30px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    /* Contact Form */
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        max-width: 400px;
-        margin: auto;
-    }
-    input, textarea, button {
-        padding: 8px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-    }
-    button[type="submit"] {
-        background-color: #333;
-        color: white;
-        border: none;
-        cursor: pointer;
-    }
-    footer {
-        background-color: #333;
-        color: white;
-        text-align: center;
-        padding: 15px 0;
-    }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- HEADER / HERO -->
 <header>
-    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836" alt="Cafe Banner">
+    <div class="hero">
+        <div class="hero-text">
+            <h1>Welcome to Restaurant Royale</h1>
+            <p>Where flavor meets elegance</p>
+            <a href="#booking" class="btn">Book a Table</a>
+        </div>
+    </div>
 </header>
 
-<nav>
+<!-- NAVIGATION -->
+<nav id="navbar">
     <a href="#about">About</a>
     <a href="#menu">Menu</a>
     <a href="#gallery">Gallery</a>
+    <a href="#booking">Booking</a>
     <a href="#contact">Contact</a>
 </nav>
 
+<!-- ABOUT -->
 <section id="about" class="about">
-    <h2>About Our Restaurant</h2>
-    <p>Welcome to Restaurant Royale, where great taste meets a warm atmosphere. Enjoy a variety of freshly prepared dishes, from classic comfort food to chef's specials, all made with quality ingredients. Whether you're here for a family dinner, a casual lunch, or a special celebration, we’re here to serve you with flavor and care.</p>
+    <h2>About Us</h2>
+    <p>At Restaurant Royale, we pride ourselves on delivering exceptional dining experiences. From fresh ingredients to masterful cooking, every dish tells a story. Whether you’re here for a romantic dinner, family gathering, or a quick lunch, we ensure every visit is memorable.</p>
 </section>
 
+<!-- MENU -->
 <section id="menu" class="menu">
     <h2>Our Menu</h2>
     <div class="menu-buttons">
@@ -174,102 +42,52 @@
         <button onclick="filterMenu('veg')">Vegetarian</button>
         <button onclick="filterMenu('nonveg')">Non-Vegetarian</button>
     </div>
-    <div class="menu-items" id="menuList">
-        <div class="menu-item" data-category="nonveg">🍛 Chicken Biryani - $8</div>
-        <div class="menu-item" data-category="nonveg">🍝 Spaghetti Carbonara - $10</div>
-        <div class="menu-item" data-category="veg">🥗 Caesar Salad - $7</div>
-        <div class="menu-item" data-category="nonveg">🍔 Cheeseburger - $9</div>
-        <div class="menu-item" data-category="veg">🍕 Margherita Pizza - $11</div>
-        <div class="menu-item" data-category="nonveg">🍤 Fried Prawns - $12</div>
-        <div class="menu-item" data-category="veg">🍲 Dal Tadka - $6</div>
-        <div class="menu-item" data-category="nonveg">🥩 Grilled Steak - $15</div>
-    </div>
+    <div class="menu-items" id="menuList"></div>
 </section>
 
+<!-- GALLERY -->
 <section id="gallery" class="gallery">
     <h2>Gallery</h2>
     <div class="gallery-images">
-        <img src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg" alt="Cafe 1">
-        <img src="https://images.pexels.com/photos/887850/pexels-photo-887850.jpeg" alt="Cafe 2">
-        <img src="https://images.pexels.com/photos/374885/pexels-photo-374885.jpeg" alt="Cozy Coffee Table">
-        <img src="https://images.pexels.com/photos/675951/pexels-photo-675951.jpeg" alt="Dish Presentation">
+        <img src="images/cafe1.jpg" alt="Cafe 1">
+        <img src="images/cafe2.jpg" alt="Cafe 2">
+        <img src="images/cafe3.jpg" alt="Cozy Table">
+        <img src="images/cafe4.jpg" alt="Dish Presentation">
     </div>
 </section>
 
-<!-- Modal for image -->
+<!-- IMAGE MODAL -->
 <div id="imageModal" class="modal">
     <span class="modal-close">&times;</span>
     <img class="modal-content" id="modalImg">
 </div>
 
-<section id="contact" class="contact">
-    <h2>Contact Us</h2>
-    <form id="contactForm">
+<!-- BOOKING FORM -->
+<section id="booking" class="booking">
+    <h2>Book a Table</h2>
+    <form id="bookingForm">
         <input type="text" id="name" placeholder="Your Name">
         <input type="email" id="email" placeholder="Your Email">
-        <textarea id="message" rows="4" placeholder="Your Message"></textarea>
-        <button type="submit">Send Message</button>
+        <input type="date" id="date">
+        <input type="time" id="time">
+        <input type="number" id="people" placeholder="Number of Guests" min="1">
+        <button type="submit">Book Now</button>
     </form>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+    <h2>Contact Us</h2>
     <p>Email: Restaurantroyale@example.com</p>
     <p>Phone: +91-98765-43210</p>
     <p>Location: 456 Gourmet Avenue, Hyderabad, India</p>
 </section>
 
+<!-- FOOTER -->
 <footer>
     <p>© <span id="year"></span> Restaurant Royale. All rights reserved.</p>
 </footer>
 
-<script>
-    // Filter menu
-    function filterMenu(category) {
-        const items = document.querySelectorAll('.menu-item');
-        items.forEach(item => {
-            if (category === 'all' || item.dataset.category === category) {
-                item.style.display = 'block';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    }
-
-    // Gallery modal
-    const modal = document.getElementById("imageModal");
-    const modalImg = document.getElementById("modalImg");
-    const closeBtn = document.querySelector(".modal-close");
-
-    document.querySelectorAll(".gallery-images img").forEach(img => {
-        img.addEventListener("click", function() {
-            modal.style.display = "block";
-            modalImg.src = this.src;
-        });
-    });
-
-    closeBtn.onclick = function() {
-        modal.style.display = "none";
-    };
-
-    // Contact form validation
-    document.getElementById("contactForm").addEventListener("submit", function(e) {
-        e.preventDefault();
-        const name = document.getElementById("name").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const message = document.getElementById("message").value.trim();
-
-        if (name === "" || email === "" || message === "") {
-            alert("Please fill in all fields.");
-            return;
-        }
-        if (!/^\S+@\S+\.\S+$/.test(email)) {
-            alert("Please enter a valid email address.");
-            return;
-        }
-        alert("Thank you for contacting us, " + name + "!");
-        document.getElementById("contactForm").reset();
-    });
-
-    // Auto year in footer
-    document.getElementById("year").textContent = new Date().getFullYear();
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
