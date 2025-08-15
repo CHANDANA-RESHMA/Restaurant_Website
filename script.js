@@ -20,7 +20,6 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
 
 // Back to Top Button
 const backToTopButton = document.getElementById('backToTop');
-
 window.onscroll = function() {
     if(document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
         backToTopButton.style.display = "block";
@@ -28,7 +27,6 @@ window.onscroll = function() {
         backToTopButton.style.display = "none";
     }
 };
-
 function scrollToTop() {
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
