@@ -1,97 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-   <title>Restaurant Royale</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        header img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
-
-        nav {
-            background-color: #333;
-            padding: 10px 0;
-            text-align: center;
-        }
-
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        section {
-            padding: 30px 20px;
-        }
-
-        .about, .contact {
-            max-width: 800px;
-            margin: auto;
-            text-align: center;
-        }
-
-        .menu {
-            background-color: #f8f8f8;
-        }
-
-        .menu h2 {
-            text-align: center;
-        }
-
-        .menu-items {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            max-width: 1000px;
-            margin: auto;
-        }
-
-        .menu-item {
-            background-color: white;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .gallery {
-            background-color: #f0f0f0;
-        }
-
-        .gallery h2 {
-            text-align: center;
-        }
-
-        .gallery-images {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .gallery-images img {
-            width: 200px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 15px 0;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Restaurant Royale</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        scroll-behavior: smooth;
+    }
+    header img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+    }
+    nav {
+        background-color: #333;
+        padding: 10px 0;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    nav a {
+        color: white;
+        margin: 0 15px;
+        text-decoration: none;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    section {
+        padding: 30px 20px;
+    }
+    .about, .contact {
+        max-width: 800px;
+        margin: auto;
+        text-align: center;
+    }
+    .menu {
+        background-color: #f8f8f8;
+    }
+    .menu h2 {
+        text-align: center;
+    }
+    .menu-buttons {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .menu-buttons button {
+        margin: 5px;
+        padding: 8px 15px;
+        border: none;
+        background-color: #333;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .menu-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        max-width: 1000px;
+        margin: auto;
+    }
+    .menu-item {
+        background-color: white;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        text-align: center;
+    }
+    .gallery {
+        background-color: #f0f0f0;
+    }
+    .gallery h2 {
+        text-align: center;
+    }
+    .gallery-images {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    .gallery-images img {
+        width: 200px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+    .gallery-images img:hover {
+        transform: scale(1.05);
+    }
+    /* Modal for images */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        padding-top: 60px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.8);
+    }
+    .modal-content {
+        margin: auto;
+        display: block;
+        max-width: 80%;
+        border-radius: 10px;
+    }
+    .modal-close {
+        position: absolute;
+        top: 20px;
+        right: 35px;
+        color: white;
+        font-size: 30px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    /* Contact Form */
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 400px;
+        margin: auto;
+    }
+    input, textarea, button {
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    button[type="submit"] {
+        background-color: #333;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 15px 0;
+    }
+</style>
 </head>
 <body>
 
@@ -107,25 +163,27 @@
 </nav>
 
 <section id="about" class="about">
-   <h2>About Our Restaurant</h2>
-    <p>Welcome to Restaurant Royale, where great taste meets a warm atmosphere. Enjoy a variety of freshly prepared dishes, from classic comfort food to chef's specials, 
-        all made with quality ingredients. Whether you're here for a family dinner, a casual lunch, or a special celebration, we’re here to serve you with flavor and care.</p>
-
+    <h2>About Our Restaurant</h2>
+    <p>Welcome to Restaurant Royale, where great taste meets a warm atmosphere. Enjoy a variety of freshly prepared dishes, from classic comfort food to chef's specials, all made with quality ingredients. Whether you're here for a family dinner, a casual lunch, or a special celebration, we’re here to serve you with flavor and care.</p>
 </section>
 
 <section id="menu" class="menu">
     <h2>Our Menu</h2>
-   <div class="menu-items">
-    <div class="menu-item">🍛 Chicken Biryani - $8</div>
-    <div class="menu-item">🍝 Spaghetti Carbonara - $10</div>
-    <div class="menu-item">🥗 Caesar Salad - $7</div>
-    <div class="menu-item">🍔 Cheeseburger - $9</div>
-    <div class="menu-item">🍕 Margherita Pizza - $11</div>
-    <div class="menu-item">🍤 Fried Prawns - $12</div>
-    <div class="menu-item">🍲 Dal Tadka - $6</div>
-    <div class="menu-item">🥩 Grilled Steak - $15</div>
-</div>
-
+    <div class="menu-buttons">
+        <button onclick="filterMenu('all')">All</button>
+        <button onclick="filterMenu('veg')">Vegetarian</button>
+        <button onclick="filterMenu('nonveg')">Non-Vegetarian</button>
+    </div>
+    <div class="menu-items" id="menuList">
+        <div class="menu-item" data-category="nonveg">🍛 Chicken Biryani - $8</div>
+        <div class="menu-item" data-category="nonveg">🍝 Spaghetti Carbonara - $10</div>
+        <div class="menu-item" data-category="veg">🥗 Caesar Salad - $7</div>
+        <div class="menu-item" data-category="nonveg">🍔 Cheeseburger - $9</div>
+        <div class="menu-item" data-category="veg">🍕 Margherita Pizza - $11</div>
+        <div class="menu-item" data-category="nonveg">🍤 Fried Prawns - $12</div>
+        <div class="menu-item" data-category="veg">🍲 Dal Tadka - $6</div>
+        <div class="menu-item" data-category="nonveg">🥩 Grilled Steak - $15</div>
+    </div>
 </section>
 
 <section id="gallery" class="gallery">
@@ -138,16 +196,80 @@
     </div>
 </section>
 
+<!-- Modal for image -->
+<div id="imageModal" class="modal">
+    <span class="modal-close">&times;</span>
+    <img class="modal-content" id="modalImg">
+</div>
+
 <section id="contact" class="contact">
     <h2>Contact Us</h2>
+    <form id="contactForm">
+        <input type="text" id="name" placeholder="Your Name">
+        <input type="email" id="email" placeholder="Your Email">
+        <textarea id="message" rows="4" placeholder="Your Message"></textarea>
+        <button type="submit">Send Message</button>
+    </form>
     <p>Email: Restaurantroyale@example.com</p>
     <p>Phone: +91-98765-43210</p>
     <p>Location: 456 Gourmet Avenue, Hyderabad, India</p>
 </section>
 
 <footer>
-    <p>© 2025 Restaurant Royale. All rights reserved.</p>
+    <p>© <span id="year"></span> Restaurant Royale. All rights reserved.</p>
 </footer>
+
+<script>
+    // Filter menu
+    function filterMenu(category) {
+        const items = document.querySelectorAll('.menu-item');
+        items.forEach(item => {
+            if (category === 'all' || item.dataset.category === category) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    // Gallery modal
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImg");
+    const closeBtn = document.querySelector(".modal-close");
+
+    document.querySelectorAll(".gallery-images img").forEach(img => {
+        img.addEventListener("click", function() {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+        });
+    });
+
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    };
+
+    // Contact form validation
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        if (name === "" || email === "" || message === "") {
+            alert("Please fill in all fields.");
+            return;
+        }
+        if (!/^\S+@\S+\.\S+$/.test(email)) {
+            alert("Please enter a valid email address.");
+            return;
+        }
+        alert("Thank you for contacting us, " + name + "!");
+        document.getElementById("contactForm").reset();
+    });
+
+    // Auto year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 
 </body>
 </html>
