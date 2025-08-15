@@ -4,11 +4,144 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Restaurant Royale</title>
-<link rel="stylesheet" href="style.css">
+<style>
+/* === GLOBAL STYLES === */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    background: #fff;
+    color: #333;
+    scroll-behavior: smooth;
+}
+h1, h2 { font-weight: 700; margin-bottom: 15px; }
+p { margin-bottom: 10px; }
+
+/* === HERO === */
+.hero {
+    background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') center/cover no-repeat;
+    height: 80vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+.hero::after {
+    content: ""; position: absolute; top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.5);
+}
+.hero-text { position: relative; z-index: 1; animation: fadeInUp 1.2s ease-in-out; }
+.hero-text h1 { font-size: 2.8rem; }
+.hero-text p { font-size: 1.2rem; margin-bottom: 15px; }
+.btn {
+    background: #d4af37; color: #000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+.btn:hover { background: #b89628; }
+
+/* === NAVBAR === */
+nav {
+    background: #000;
+    display: flex; justify-content: center;
+    position: sticky; top: 0;
+    z-index: 1000;
+}
+nav a {
+    color: white; padding: 15px 20px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+nav a:hover, nav a.active { background: #d4af37; color: #000; }
+
+/* === SECTION === */
+section {
+    padding: 50px 20px;
+    max-width: 1100px;
+    margin: auto;
+    text-align: center;
+}
+
+/* === MENU === */
+.menu-buttons button {
+    margin: 5px; padding: 8px 15px;
+    border: none; background: #000;
+    color: white; border-radius: 5px; cursor: pointer;
+    transition: background 0.3s;
+}
+.menu-buttons button:hover { background: #d4af37; color: #000; }
+.menu-items {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px; margin-top: 20px;
+}
+.menu-item {
+    background: white; padding: 15px;
+    border-radius: 8px; border: 1px solid #eee;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+}
+.menu-item:hover { transform: translateY(-5px); }
+
+/* === GALLERY === */
+.gallery-images {
+    display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+}
+.gallery-images img {
+    width: 200px; height: 150px;
+    object-fit: cover; border-radius: 8px;
+    cursor: pointer; transition: transform 0.3s;
+}
+.gallery-images img:hover { transform: scale(1.05); }
+
+/* === MODAL === */
+.modal {
+    display: none; position: fixed;
+    z-index: 2000; padding-top: 60px;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+}
+.modal-content {
+    display: block; margin: auto;
+    max-width: 80%; border-radius: 8px;
+}
+.modal-close {
+    position: absolute; top: 20px; right: 35px;
+    font-size: 30px; color: white; cursor: pointer;
+}
+
+/* === FORM === */
+form {
+    display: flex; flex-direction: column;
+    gap: 10px; max-width: 400px; margin: auto;
+}
+input, button {
+    padding: 10px; border-radius: 5px; border: 1px solid #ccc;
+}
+button {
+    background: #000; color: white; cursor: pointer;
+    transition: background 0.3s;
+}
+button:hover { background: #d4af37; color: #000; }
+
+/* === FOOTER === */
+footer {
+    background: #000; color: white;
+    padding: 15px 0; text-align: center;
+}
+
+/* === ANIMATIONS === */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
 </head>
 <body>
 
-<!-- HEADER / HERO -->
+<!-- HERO -->
 <header>
     <div class="hero">
         <div class="hero-text">
@@ -19,7 +152,7 @@
     </div>
 </header>
 
-<!-- NAVIGATION -->
+<!-- NAV -->
 <nav id="navbar">
     <a href="#about">About</a>
     <a href="#menu">Menu</a>
@@ -29,13 +162,13 @@
 </nav>
 
 <!-- ABOUT -->
-<section id="about" class="about">
+<section id="about">
     <h2>About Us</h2>
     <p>At Restaurant Royale, we pride ourselves on delivering exceptional dining experiences. From fresh ingredients to masterful cooking, every dish tells a story. Whether you’re here for a romantic dinner, family gathering, or a quick lunch, we ensure every visit is memorable.</p>
 </section>
 
 <!-- MENU -->
-<section id="menu" class="menu">
+<section id="menu">
     <h2>Our Menu</h2>
     <div class="menu-buttons">
         <button onclick="filterMenu('all')">All</button>
@@ -46,37 +179,37 @@
 </section>
 
 <!-- GALLERY -->
-<section id="gallery" class="gallery">
+<section id="gallery">
     <h2>Gallery</h2>
     <div class="gallery-images">
-        <img src="images/cafe1.jpg" alt="Cafe 1">
-        <img src="images/cafe2.jpg" alt="Cafe 2">
-        <img src="images/cafe3.jpg" alt="Cozy Table">
-        <img src="images/cafe4.jpg" alt="Dish Presentation">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2" alt="Cafe 1">
+        <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d" alt="Cafe 2">
+        <img src="https://images.unsplash.com/photo-1525755662778-989d0524087e" alt="Cozy Table">
+        <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe" alt="Dish Presentation">
     </div>
 </section>
 
-<!-- IMAGE MODAL -->
+<!-- MODAL -->
 <div id="imageModal" class="modal">
     <span class="modal-close">&times;</span>
     <img class="modal-content" id="modalImg">
 </div>
 
-<!-- BOOKING FORM -->
-<section id="booking" class="booking">
+<!-- BOOKING -->
+<section id="booking">
     <h2>Book a Table</h2>
     <form id="bookingForm">
-        <input type="text" id="name" placeholder="Your Name">
-        <input type="email" id="email" placeholder="Your Email">
-        <input type="date" id="date">
-        <input type="time" id="time">
-        <input type="number" id="people" placeholder="Number of Guests" min="1">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <input type="date" id="date" required>
+        <input type="time" id="time" required>
+        <input type="number" id="people" placeholder="Number of Guests" min="1" required>
         <button type="submit">Book Now</button>
     </form>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="contact">
+<section id="contact">
     <h2>Contact Us</h2>
     <p>Email: Restaurantroyale@example.com</p>
     <p>Phone: +91-98765-43210</p>
@@ -88,6 +221,44 @@
     <p>© <span id="year"></span> Restaurant Royale. All rights reserved.</p>
 </footer>
 
-<script src="script.js"></script>
+<script>
+// Dynamic year
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Menu items
+const menuData = [
+    {name: "Veg Salad", type: "veg"},
+    {name: "Paneer Tikka", type: "veg"},
+    {name: "Grilled Chicken", type: "nonveg"},
+    {name: "Fish Curry", type: "nonveg"},
+];
+function renderMenu(items) {
+    const menuList = document.getElementById("menuList");
+    menuList.innerHTML = "";
+    items.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "menu-item";
+        div.innerHTML = `<h3>${item.name}</h3>`;
+        menuList.appendChild(div);
+    });
+}
+function filterMenu(type) {
+    if (type === "all") renderMenu(menuData);
+    else renderMenu(menuData.filter(i => i.type === type));
+}
+renderMenu(menuData);
+
+// Gallery modal
+const modal = document.getElementById("imageModal");
+const modalImg = document.getElementById("modalImg");
+document.querySelectorAll(".gallery-images img").forEach(img => {
+    img.onclick = () => {
+        modal.style.display = "block";
+        modalImg.src = img.src;
+    };
+});
+document.querySelector(".modal-close").onclick = () => modal.style.display = "none";
+window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
+</script>
 </body>
 </html>
