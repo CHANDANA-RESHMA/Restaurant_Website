@@ -1,5 +1,5 @@
 function filterMenu(category) {
-    let items = document.querySelectorAll('.item');
+    let items = document.querySelectorAll('.menu-item');
     items.forEach(item => {
         if (category === 'all' || item.classList.contains(category)) {
             item.style.display = 'block';
