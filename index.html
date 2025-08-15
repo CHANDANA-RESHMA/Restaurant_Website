@@ -1,577 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Restaurant Royale — Single-File (HTML+CSS+JS)</title>
-<style>
-/* ========== RESET & THEME ========== */
-:root{
-  --bg:#0f1115; --bg-2:#151821; --card:#1b1f2a; --text:#e9eef5; --muted:#aab2c0;
-  --brand:#ff9f1c; --brand-2:#ffbf69; --accent:#2ec4b6; --danger:#ef476f;
-  --ring:0 0 0 3px rgba(255,159,28,.25);
-}
-*{box-sizing:border-box}html,body{margin:0;padding:0}
-body{
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji", sans-serif;
-  background: radial-gradient(1200px 800px at 10% -10%, #1a2030 0%, #0f1115 50%) fixed;
-  color:var(--text); line-height:1.6; scroll-behavior:smooth;
-}
-img{max-width:100%;display:block}
-a{color:inherit}
-
-/* Containers & utilities */
-.container{max-width:1100px;margin:0 auto;padding:0 16px}
-.section{padding:80px 0}
-.section-title{font-size:2rem;font-weight:800;margin:0 0 10px}
-.lead{color:var(--muted);margin:0 0 18px}
-.grid-2{display:grid;grid-template-columns:1.15fr 1fr;gap:28px;align-items:center}
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.card{background:var(--card);border:1px solid #242b3a;border-radius:18px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-.chip{background:#222a38;border:1px solid #2f3749;color:var(--text);padding:8px 12px;border-radius:999px;cursor:pointer}
-.chip.active{background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#111;border-color:transparent}
-.btn{display:inline-block;padding:12px 18px;border-radius:999px;text-decoration:none;border:1px solid transparent;font-weight:700;
-  transition:.25s transform ease,.25s opacity ease}
-.btn:hover{transform:translateY(-2px)}
-.btn-primary{background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#111}
-.btn-ghost{border-color:#2f3749;background:transparent;color:var(--text)}
-.btn-danger{background:var(--danger);color:#fff}
-
-/* ========== TOP BAR & NAV ========== */
-.topbar{font-size:.95rem;color:var(--muted);border-bottom:1px solid #242b3a}
-.topbar .container{display:flex;gap:18px;flex-wrap:wrap;justify-content:flex-end;padding:8px 16px}
-.topbar .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block;margin:0 8px 2px}
-
-.nav{position:sticky;top:0;z-index:80;background:rgba(16,19,28,.75);backdrop-filter:blur(10px);border-bottom:1px solid #242b3a}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-.logo{font-weight:900;letter-spacing:.3px}
-.logo span{background:linear-gradient(90deg,var(--brand),var(--accent));-webkit-background-clip:text;color:transparent}
-#navLinks a{color:var(--text);text-decoration:none;margin:0 8px;padding:8px 10px;border-radius:10px}
-#navLinks a.active,#navLinks a:hover{background:#1c2333}
-.burger{display:none;flex-direction:column;gap:4px;background:none;border:none}
-.burger span{width:26px;height:2px;background:var(--text)}
-.theme{margin-left:10px}
-
-/* ========== HERO ========== */
-.hero{position:relative;min-height:78vh;display:flex;align-items:center;overflow:hidden}
-.hero::before{
-  content:""; position:absolute; inset:-30% -10% auto -10%; height:120%;
-  background: conic-gradient(from 180deg at 50% 50%, rgba(255,191,105,.25), transparent 40%, rgba(46,196,182,.18));
-  filter: blur(60px);
-}
-.hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:28px}
-.hero h1{font-size:3rem;margin:0}
-.hero h1 span{background:linear-gradient(90deg,var(--brand),var(--accent));-webkit-background-clip:text;color:transparent}
-.hero-card{border:1px dashed #2f3749}
-.badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.badges span{display:inline-flex;align-items:center;gap:8px;background:#1c2333;border:1px solid #2f3749;padding:8px 12px;border-radius:999px;color:var(--muted)}
-
-/* ========== MENU ========== */
-.menu-controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0 22px}
-.search{display:flex;gap:8px;justify-content:center;margin-bottom:10px}
-.search input{width:100%;max-width:420px;padding:12px;border-radius:12px;border:1px solid #2f3749;background:#121725;color:var(--text);outline:none}
-.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
-.menu-card{border:1px solid #2f3749;border-radius:16px;overflow:hidden;background:linear-gradient(180deg,#141a27,#111622);}
-.menu-top{
-  height:120px; background:
-  radial-gradient(120px 60px at 20% 30%, rgba(255,159,28,.25), transparent 60%),
-  radial-gradient(120px 60px at 80% 70%, rgba(46,196,182,.25), transparent 60%),
-  linear-gradient(120deg,#1a2131,#101521);
-  display:flex; align-items:center; justify-content:center; font-size:40px;
-}
-.menu-body{padding:12px 14px}
-.menu-title{display:flex;justify-content:space-between;gap:10px;align-items:center}
-.price{font-weight:900;color:var(--brand)}
-.tag{display:inline-block;margin-top:8px;font-size:.8rem;background:#1c2333;padding:4px 8px;border:1px solid #2f3749;border-radius:8px;color:var(--muted)}
-.add-btn{margin-top:10px;width:100%}
-
-/* ========== GALLERY (no images, stylish tiles) ========== */
-.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
-.tile{
-  height:160px;border-radius:16px;position:relative;overflow:hidden;border:1px solid #2f3749;
-  background:
-    linear-gradient(120deg,#141a27,#121725),
-    radial-gradient(90px 60px at 30% 30%, rgba(255,159,28,.18), transparent 60%),
-    radial-gradient(90px 60px at 70% 70%, rgba(46,196,182,.18), transparent 60%);
-  cursor:zoom-in;
-}
-.tile::after{
-  content:"Chef’s Pick"; position:absolute; bottom:10px; left:12px; font-size:.85rem; color:#dfe7f5;
-  background:#1c2333; border:1px solid #2f3749; padding:4px 8px; border-radius:8px;
-}
-
-/* Lightbox */
-.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:100}
-.lightbox img{max-width:88%;max-height:80%;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.4);border:1px solid #2f3749}
-.lightbox .close{position:absolute;top:20px;right:24px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer}
-
-/* ========== TESTIMONIALS ========== */
-.quote{font-size:1.05rem;color:#dfe7f5}
-.carousel{position:relative;overflow:hidden}
-.slide{display:none}
-.slide.active{display:block;animation:fade .45s ease}
-@keyframes fade{from{opacity:.4}to{opacity:1}}
-.carousel-controls{display:flex;gap:10px;justify-content:center;margin-top:10px}
-.carousel-controls button{background:#1c2333;border:1px solid #2f3749;color:var(--text);border-radius:10px;padding:8px 12px;cursor:pointer}
-
-/* ========== BOOKING ========== */
-form .row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-input,textarea,select{
-  width:100%;padding:12px;border-radius:12px;border:1px solid #2f3749;background:#121725;color:var(--text);outline:none
-}
-input:focus,textarea:focus,select:focus{box-shadow:var(--ring)}
-.form-note{color:var(--muted);font-size:.9rem;margin-top:8px}
-.summary{margin-top:10px;color:var(--muted);font-size:.95rem}
-
-/* ========== CONTACT/FOOTER ========== */
-.kv{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.kv div{background:#121725;border:1px solid #2f3749;border-radius:12px;padding:12px}
-.footer{border-top:1px solid #242b3a;background:#0b0f17;padding:24px 0;color:var(--muted)}
-.footer-inner{display:flex;align-items:center;justify-content:space-between}
-
-/* ========== REVEAL ANIMATIONS ========== */
-.reveal{opacity:0;transform:translateY(16px);transition:.6s ease}
-.reveal.visible{opacity:1;transform:none}
-.delay-1{transition-delay:.12s}.delay-2{transition-delay:.24s}
-
-/* ========== RESPONSIVE ========== */
-@media (max-width: 950px){
-  .grid-2{grid-template-columns:1fr}
-  .hero-grid{grid-template-columns:1fr}
-  #navLinks{position:fixed;inset:62px 16px auto 16px;background:#0f1115;border:1px solid #242b3a;border-radius:12px;padding:10px;display:none;flex-direction:column}
-  #navLinks a{padding:12px;border-radius:10px;margin:2px 0}
-  .burger{display:flex}
-  form .row{grid-template-columns:1fr}
-  .kv{grid-template-columns:1fr}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TasteBuds Restaurant</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Navbar -->
+    <header>
+        <nav>
+            <h1 class="logo">TasteBuds</h1>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<!-- ===== Topbar ===== -->
-<div class="topbar">
-  <div class="container">
-    <span>📞 +91 98765 43210</span>
-    <span class="dot"></span>
-    <span>📍 456 Gourmet Ave, Hyderabad</span>
-    <span class="dot"></span>
-    <span>🕒 Mon–Sun: 11:00–23:00</span>
-  </div>
-</div>
-
-<!-- ===== Nav ===== -->
-<header class="nav">
-  <div class="container nav-inner">
-    <div class="logo">Restaurant <span>Royale</span></div>
-    <nav id="navLinks">
-      <a href="#about">About</a>
-      <a href="#menu">Menu</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#booking">Booking</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <div>
-      <button class="burger" id="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
-      <button class="btn btn-ghost theme" id="toggleTheme" aria-label="Toggle theme">🌙</button>
-    </div>
-  </div>
-</header>
-
-<!-- ===== Hero ===== -->
-<section class="hero">
-  <div class="container hero-grid">
-    <div class="reveal">
-      <h1>Taste the <span>Royale</span> Experience</h1>
-      <p class="lead">Fresh ingredients, bold flavors & cozy vibes—served daily.</p>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <a class="btn btn-primary" href="#menu">View Menu</a>
-        <a class="btn btn-ghost" href="#booking">Reserve Table</a>
-      </div>
-      <div class="badges">
-        <span>🥗 Fresh & Local</span>
-        <span>👨‍🍳 Chef-crafted</span>
-        <span>☕ Cozy Ambience</span>
-      </div>
-    </div>
-    <div class="card hero-card reveal delay-1">
-      <h3 style="margin:0 0 8px">Today’s Specials</h3>
-      <ul style="margin:0;padding-left:18px; color:var(--muted)">
-        <li>Smoked Paneer Tacos — ₹240</li>
-        <li>Hyderabadi Biryani Bowl — ₹320</li>
-        <li>Mango Chili Cooler — ₹120</li>
-      </ul>
-      <a class="btn btn-primary" href="#menu" style="margin-top:12px">Order from Menu</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== About ===== -->
-<section id="about" class="section">
-  <div class="container grid-2">
-    <div class="reveal">
-      <h2 class="section-title">About Us</h2>
-      <p class="lead">At <b>Restaurant Royale</b>, we blend classic recipes with modern technique. Whether it’s a family dinner, casual lunch, or a celebration, we make it memorable.</p>
-      <div class="grid-3">
-        <div class="card reveal"><b>Quality</b><br/><span class="lead">Seasonal produce</span></div>
-        <div class="card reveal delay-1"><b>Care</b><br/><span class="lead">Friendly service</span></div>
-        <div class="card reveal delay-2"><b>Consistency</b><br/><span class="lead">Every plate counts</span></div>
-      </div>
-    </div>
-    <div class="card reveal delay-1">
-      <h3 style="margin:0 0 10px">Hours</h3>
-      <ul style="list-style:none;margin:0;padding:0;color:var(--muted)">
-        <li style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #2f3749"><span>Mon–Thu</span><span>11:00–22:00</span></li>
-        <li style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #2f3749"><span>Fri–Sun</span><span>11:00–23:00</span></li>
-        <li style="display:flex;justify-content:space-between;padding:6px 0"><span>Holidays</span><span>10:00–23:00</span></li>
-      </ul>
-      <a href="#contact" class="btn btn-ghost" style="margin-top:12px">Get Directions</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Menu ===== -->
-<section id="menu" class="section">
-  <div class="container">
-    <h2 class="section-title" style="text-align:center">Our Menu</h2>
-    <p class="lead" style="text-align:center">Filter by category or search a dish.</p>
-
-    <div class="menu-controls">
-      <button class="chip active" data-filter="all">All</button>
-      <button class="chip" data-filter="veg">Vegetarian</button>
-      <button class="chip" data-filter="nonveg">Non-Vegetarian</button>
-      <button class="chip" data-filter="dessert">Desserts</button>
-      <button class="chip" data-filter="drinks">Drinks</button>
-    </div>
-    <div class="search">
-      <input id="searchBox" type="text" placeholder="🔎 Search dish (e.g., biryani, pizza, chai)"/>
-    </div>
-
-    <div id="menuGrid" class="menu-grid"></div>
-  </div>
-</section>
-
-<!-- ===== Gallery (image-free) ===== -->
-<section id="gallery" class="section">
-  <div class="container">
-    <h2 class="section-title" style="text-align:center">Gallery</h2>
-    <p class="lead" style="text-align:center">Styled tiles (no external images). Click to preview pattern.</p>
-    <div class="gallery-grid">
-      <div class="tile"></div><div class="tile"></div><div class="tile"></div>
-      <div class="tile"></div><div class="tile"></div><div class="tile"></div>
-    </div>
-  </div>
-
-  <!-- Lightbox -->
-  <div id="lightbox" class="lightbox" aria-hidden="true">
-    <button class="close" aria-label="Close">&times;</button>
-    <!-- We render a generated SVG snapshot into this <img> for demo -->
-    <img id="lightboxImg" alt="Preview"/>
-  </div>
-</section>
-
-<!-- ===== Testimonials ===== -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title" style="text-align:center">What Guests Say</h2>
-    <div class="carousel card reveal" id="carousel" style="margin-top:10px">
-      <div class="slide active">
-        <p class="quote">“Absolutely delicious! The biryani was fragrant and the ambience perfect.” — <b>Aisha K.</b></p>
-      </div>
-      <div class="slide">
-        <p class="quote">“Great service and cozy vibes. Desserts are a must-try.” — <b>Rahul M.</b></p>
-      </div>
-      <div class="slide">
-        <p class="quote">“Best date-night spot. We’ll be back soon.” — <b>Priya & Anil</b></p>
-      </div>
-    </div>
-    <div class="carousel-controls">
-      <button id="prev">⟵ Prev</button>
-      <button id="next">Next ⟶</button>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Booking ===== -->
-<section id="booking" class="section">
-  <div class="container grid-2">
-    <div class="reveal">
-      <h2 class="section-title">Reserve a Table</h2>
-      <p class="lead">Book in seconds. We’ll confirm by email.</p>
-      <form id="bookingForm" class="card" novalidate>
-        <div class="row">
-          <input id="bName" type="text" placeholder="Your Name" required/>
-          <input id="bEmail" type="email" placeholder="Your Email" required/>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-text">
+            <h2>Welcome to TasteBuds</h2>
+            <p>Delicious meals made with love.</p>
+            <a href="#menu" class="btn">Explore Menu</a>
         </div>
-        <div class="row">
-          <input id="bDate" type="date" required/>
-          <input id="bTime" type="time" required/>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+        <h2>Our Menu</h2>
+        <div class="filter-buttons">
+            <button onclick="filterMenu('all')">All</button>
+            <button onclick="filterMenu('starter')">Starters</button>
+            <button onclick="filterMenu('main')">Main Course</button>
+            <button onclick="filterMenu('dessert')">Desserts</button>
         </div>
-        <div class="row">
-          <input id="bPeople" type="number" min="1" placeholder="Guests" required/>
-          <select id="bOccasion">
-            <option value="">Occasion (optional)</option>
-            <option>Birthday</option><option>Anniversary</option><option>Business</option>
-          </select>
+        <div class="menu-items">
+            <div class="item starter">
+                <img src="https://via.placeholder.com/200" alt="Soup">
+                <h3>Tomato Soup</h3>
+                <p>$5.99</p>
+            </div>
+            <div class="item main">
+                <img src="https://via.placeholder.com/200" alt="Pizza">
+                <h3>Margherita Pizza</h3>
+                <p>$10.99</p>
+            </div>
+            <div class="item dessert">
+                <img src="https://via.placeholder.com/200" alt="Cake">
+                <h3>Chocolate Cake</h3>
+                <p>$6.99</p>
+            </div>
+            <div class="item main">
+                <img src="https://via.placeholder.com/200" alt="Pasta">
+                <h3>Spaghetti Carbonara</h3>
+                <p>$12.99</p>
+            </div>
         </div>
-        <textarea id="bNote" rows="3" placeholder="Notes (optional)"></textarea>
-        <button class="btn btn-primary" type="submit">Book Now</button>
-        <button class="btn btn-ghost" type="reset">Clear</button>
-        <div id="formMsg" class="form-note"></div>
-        <div id="lastBooking" class="summary"></div>
-      </form>
-    </div>
-    <div class="card reveal delay-1">
-      <h3 style="margin:0 0 10px">Why Reserve Online?</h3>
-      <ul style="margin:0;padding-left:18px;color:var(--muted)">
-        <li>Instant confirmation</li>
-        <li>Priority seating</li>
-        <li>Special notes for Chef</li>
-      </ul>
-      <div style="margin-top:14px">
-        <button class="btn btn-danger" id="clearStorage">Clear Saved Bookings</button>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ===== Contact ===== -->
-<section id="contact" class="section">
-  <div class="container grid-2">
-    <div class="reveal">
-      <h2 class="section-title">Contact Us</h2>
-      <p class="lead">📧 restaurantroyale@example.com<br/>📞 +91-98765-43210<br/>📍 456 Gourmet Avenue, Hyderabad, India</p>
-      <div class="kv">
-        <div>Instagram: @restaurantroyale</div>
-        <div>Facebook: /restaurantroyale</div>
-      </div>
-    </div>
-    <div class="card reveal delay-1">
-      <h3 style="margin-top:0">Opening Hours</h3>
-      <p class="lead" id="openNow">Checking status…</p>
-      <small class="lead">Tip: We’re busiest 19:00–21:00.</small>
-    </div>
-  </div>
-</section>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2>About Us</h2>
+        <p>At TasteBuds, we believe food should be an experience. Our chefs use only the freshest ingredients to create mouthwatering dishes that will leave you coming back for more.</p>
+    </section>
 
-<!-- ===== Footer ===== -->
-<footer class="footer">
-  <div class="container footer-inner">
-    <div class="logo">Restaurant <span>Royale</span></div>
-    <p>© <span id="year"></span> Restaurant Royale. All rights reserved.</p>
-  </div>
-</footer>
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit" class="btn">Send Message</button>
+        </form>
+    </section>
 
-<script>
-/* ========= DATA ========= */
-const MENU_ITEMS = [
-  {name:"Chicken Biryani",       price:320, cat:"nonveg", icon:"🍗"},
-  {name:"Spaghetti Carbonara",   price:380, cat:"nonveg", icon:"🍝"},
-  {name:"Caesar Salad",          price:220, cat:"veg",    icon:"🥗"},
-  {name:"Cheeseburger",          price:300, cat:"nonveg", icon:"🍔"},
-  {name:"Margherita Pizza",      price:350, cat:"veg",    icon:"🍕"},
-  {name:"Fried Prawns",          price:420, cat:"nonveg", icon:"🍤"},
-  {name:"Dal Tadka",             price:180, cat:"veg",    icon:"🍲"},
-  {name:"Gulab Jamun",           price:120, cat:"dessert",icon:"🍮"},
-  {name:"Tiramisu",              price:180, cat:"dessert",icon:"🍰"},
-  {name:"Masala Chai",           price:60,  cat:"drinks", icon:"☕"},
-  {name:"Cold Coffee",           price:90,  cat:"drinks", icon:"🥤"}
-];
+    <footer>
+        <p>&copy; 2025 TasteBuds Restaurant | All Rights Reserved</p>
+    </footer>
 
-/* ========= NAV / THEME ========= */
-const burger = document.getElementById('burger');
-const navLinks = document.getElementById('navLinks');
-burger.addEventListener('click', ()=>{
-  const open = getComputedStyle(navLinks).display !== 'none';
-  navLinks.style.display = open ? 'none' : 'flex';
-});
-document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click', ()=>{
-  if (window.innerWidth <= 950) navLinks.style.display='none';
-}));
-
-// Active link on scroll
-const sections = Array.from(document.querySelectorAll('section[id]'));
-window.addEventListener('scroll', ()=>{
-  const fromTop = window.scrollY + 120;
-  let current = sections.findLast(sec => sec.offsetTop <= fromTop);
-  document.querySelectorAll('#navLinks a').forEach(a=>a.classList.remove('active'));
-  if(current){
-    const link = document.querySelector(`#navLinks a[href="#${current.id}"]`);
-    link && link.classList.add('active');
-  }
-});
-
-// Theme toggle (light/dark-like by inverting accents)
-const toggleTheme = document.getElementById('toggleTheme');
-let dark = true;
-toggleTheme.addEventListener('click', ()=>{
-  dark = !dark;
-  document.documentElement.style.setProperty('--bg', dark?'#0f1115':'#f7f8fb');
-  document.documentElement.style.setProperty('--bg-2', dark?'#151821':'#ffffff');
-  document.documentElement.style.setProperty('--card', dark?'#1b1f2a':'#ffffff');
-  document.body.style.background = dark
-    ? 'radial-gradient(1200px 800px at 10% -10%, #1a2030 0%, #0f1115 50%) fixed'
-    : 'radial-gradient(1200px 800px at 10% -10%, #e9efff 0%, #f7f8fb 50%) fixed';
-  toggleTheme.textContent = dark ? '🌙' : '☀️';
-});
-
-/* ========= REVEAL ANIMATIONS ========= */
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-},{threshold:0.2});
-document.querySelectorAll('.reveal, .card, .menu-card, .tile').forEach(el=>io.observe(el));
-
-/* ========= MENU RENDER / FILTER / SEARCH ========= */
-const grid = document.getElementById('menuGrid');
-function renderMenu(list){
-  grid.innerHTML = '';
-  list.forEach(m=>{
-    const card = document.createElement('article');
-    card.className = 'menu-card reveal';
-    card.innerHTML = `
-      <div class="menu-top">${m.icon}</div>
-      <div class="menu-body">
-        <div class="menu-title">
-          <h4 style="margin:0">${m.name}</h4>
-          <span class="price">₹${m.price}</span>
-        </div>
-        <span class="tag">#${m.cat}</span>
-        <button class="btn btn-ghost add-btn" data-item="${m.name}">Add</button>
-      </div>`;
-    grid.appendChild(card);
-  });
-}
-renderMenu(MENU_ITEMS);
-
-// Filter chips
-document.querySelectorAll('.chip').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
-    btn.classList.add('active');
-    const f = btn.dataset.filter;
-    const q = document.getElementById('searchBox').value.trim().toLowerCase();
-    let items = f==='all'? MENU_ITEMS : MENU_ITEMS.filter(i=>i.cat===f);
-    if(q) items = items.filter(i=>i.name.toLowerCase().includes(q));
-    renderMenu(items);
-  });
-});
-// Search
-document.getElementById('searchBox').addEventListener('input', (e)=>{
-  const q = e.target.value.trim().toLowerCase();
-  const active = document.querySelector('.chip.active')?.dataset.filter ?? 'all';
-  let items = active==='all'? MENU_ITEMS : MENU_ITEMS.filter(i=>i.cat===active);
-  if(q) items = items.filter(i=>i.name.toLowerCase().includes(q));
-  renderMenu(items);
-});
-
-/* Simple cart demo (toast) */
-grid.addEventListener('click', (e)=>{
-  const btn = e.target.closest('.add-btn');
-  if(!btn) return;
-  const name = btn.dataset.item;
-  toast(`Added: ${name}`);
-});
-function toast(msg){
-  const t = document.createElement('div');
-  t.textContent = msg;
-  Object.assign(t.style,{
-    position:'fixed',bottom:'20px',left:'50%',transform:'translateX(-50%)',
-    background:'#1c2333',color:'#fff',padding:'10px 14px',border:'1px solid #2f3749',
-    borderRadius:'10px',zIndex:200,opacity:'0',transition:'opacity .2s ease'
-  });
-  document.body.appendChild(t);
-  requestAnimationFrame(()=>{t.style.opacity='1';});
-  setTimeout(()=>{t.style.opacity='0'; setTimeout(()=>t.remove(),200);},1500);
-}
-
-/* ========= GALLERY LIGHTBOX (generated SVG preview) ========= */
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightboxImg');
-document.querySelectorAll('.tile').forEach((tile, i)=>{
-  tile.addEventListener('click', ()=>{
-    const svg = encodeURIComponent(`
-      <svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'>
-        <defs>
-          <linearGradient id='g' x1='0' x2='1' y1='0' y2='1'>
-            <stop offset='0%' stop-color='#101521'/>
-            <stop offset='100%' stop-color='#1a2131'/>
-          </linearGradient>
-        </defs>
-        <rect width='100%' height='100%' fill='url(#g)'/>
-        <circle cx='200' cy='180' r='120' fill='rgba(255,159,28,0.25)'/>
-        <circle cx='580' cy='340' r='120' fill='rgba(46,196,182,0.25)'/>
-        <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle'
-              fill='#e9eef5' font-family='Segoe UI, Arial' font-size='28'>Gallery Tile ${i+1}</text>
-      </svg>`);
-    lightboxImg.src = `data:image/svg+xml;charset=utf-8,${svg}`;
-    lightbox.style.display='flex';
-    lightbox.setAttribute('aria-hidden','false');
-  });
-});
-lightbox.querySelector('.close').addEventListener('click', ()=>{
-  lightbox.style.display='none'; lightbox.setAttribute('aria-hidden','true');
-});
-lightbox.addEventListener('click', (e)=>{
-  if(e.target===lightbox) { lightbox.style.display='none'; lightbox.setAttribute('aria-hidden','true'); }
-});
-
-/* ========= TESTIMONIALS CAROUSEL ========= */
-const slides = Array.from(document.querySelectorAll('.slide'));
-let sIdx = 0;
-function showSlide(n){ slides.forEach(s=>s.classList.remove('active')); slides[n].classList.add('active'); }
-document.getElementById('prev').addEventListener('click', ()=>{ sIdx=(sIdx-1+slides.length)%slides.length; showSlide(sIdx); });
-document.getElementById('next').addEventListener('click', ()=>{ sIdx=(sIdx+1)%slides.length; showSlide(sIdx); });
-setInterval(()=>{ sIdx=(sIdx+1)%slides.length; showSlide(sIdx); }, 5000);
-
-/* ========= BOOKING FORM ========= */
-const form = document.getElementById('bookingForm');
-const msg  = document.getElementById('formMsg');
-const last = document.getElementById('lastBooking');
-
-function loadLast(){
-  const data = JSON.parse(localStorage.getItem('royale_last_booking')||'null');
-  if(!data){ last.textContent = ""; return; }
-  last.textContent = `Last booking: ${data.name} • ${data.people} guests on ${data.date} at ${data.time}${data.occasion? ' • '+data.occasion:''}`;
-}
-loadLast();
-
-form.addEventListener('submit', (e)=>{
-  e.preventDefault();
-  const name = document.getElementById('bName').value.trim();
-  const email= document.getElementById('bEmail').value.trim();
-  const date = document.getElementById('bDate').value;
-  const time = document.getElementById('bTime').value;
-  const ppl  = document.getElementById('bPeople').value;
-  const occ  = document.getElementById('bOccasion').value;
-  const note = document.getElementById('bNote').value.trim();
-
-  // Basic validation
-  const emailOk = /^\S+@\S+\.\S+$/.test(email);
-  if(!name || !emailOk || !date || !time || !ppl){ msg.style.color='var(--danger)'; msg.textContent='Please fill all required fields with valid details.'; return; }
-
-  const payload = {name, email, date, time, people:ppl, occasion:occ, note};
-  localStorage.setItem('royale_last_booking', JSON.stringify(payload));
-  msg.style.color='var(--accent)';
-  msg.textContent = `Thanks, ${name}! Your table for ${ppl} is booked on ${date} at ${time}. A confirmation will be sent to ${email}.`;
-  form.reset(); loadLast();
-});
-document.getElementById('clearStorage').addEventListener('click', ()=>{
-  localStorage.removeItem('royale_last_booking'); loadLast(); toast('Cleared saved bookings');
-});
-
-/* ========= OPEN NOW INDICATOR ========= */
-(function openNow(){
-  const el = document.getElementById('openNow');
-  const d = new Date();
-  const day = d.getDay(); // 0 Sun .. 6 Sat
-  const h = d.getHours() + d.getMinutes()/60;
-  const weekend = (day===0 || day===5 || day===6);
-  const open = 10 + (weekend?1:1); // 11:00
-  const close = weekend? 23 : 22;  // 23:00 or 22:00
-  el.textContent = (h>=11 && h<close) ? '✅ We are open now' : '⏳ Currently closed';
-})();
-
-/* ========= FOOTER YEAR ========= */
-document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+    <script src="script.js"></script>
 </body>
 </html>
