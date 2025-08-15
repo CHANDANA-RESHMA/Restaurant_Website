@@ -7,10 +7,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <!-- Navbar -->
     <header>
         <nav>
-            <h1 class="logo">TasteBuds</h1>
+            <div class="logo">TasteBuds</div>
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#menu">Menu</a></li>
@@ -21,66 +22,69 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-text">
-            <h2>Welcome to TasteBuds</h2>
-            <p>Delicious meals made with love.</p>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Welcome to TasteBuds</h1>
+            <p>Where taste meets the soul</p>
             <a href="#menu" class="btn">Explore Menu</a>
         </div>
     </section>
 
     <!-- Menu Section -->
-    <section id="menu" class="menu">
+    <section id="menu">
         <h2>Our Menu</h2>
         <div class="filter-buttons">
             <button onclick="filterMenu('all')">All</button>
-            <button onclick="filterMenu('starter')">Starters</button>
+            <button onclick="filterMenu('starters')">Starters</button>
             <button onclick="filterMenu('main')">Main Course</button>
-            <button onclick="filterMenu('dessert')">Desserts</button>
+            <button onclick="filterMenu('desserts')">Desserts</button>
         </div>
-        <div class="menu-items">
-            <div class="item starter">
-                <img src="https://via.placeholder.com/200" alt="Soup">
+
+        <div class="menu-items" id="menuList">
+            <div class="menu-item starters">
+                <img src="https://images.unsplash.com/photo-1604908177453-746295bf1ad9?auto=format&fit=crop&w=500&q=80" alt="Soup">
                 <h3>Tomato Soup</h3>
-                <p>$5.99</p>
+                <p>Rich and creamy tomato soup.</p>
             </div>
-            <div class="item main">
-                <img src="https://via.placeholder.com/200" alt="Pizza">
-                <h3>Margherita Pizza</h3>
-                <p>$10.99</p>
+            <div class="menu-item main">
+                <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?auto=format&fit=crop&w=500&q=80" alt="Pizza">
+                <h3>Cheese Pizza</h3>
+                <p>Cheesy goodness with fresh toppings.</p>
             </div>
-            <div class="item dessert">
-                <img src="https://via.placeholder.com/200" alt="Cake">
+            <div class="menu-item desserts">
+                <img src="https://images.unsplash.com/photo-1606756790138-24694cfd3f09?auto=format&fit=crop&w=500&q=80" alt="Cake">
                 <h3>Chocolate Cake</h3>
-                <p>$6.99</p>
+                <p>Soft, moist, and full of chocolate flavor.</p>
             </div>
-            <div class="item main">
-                <img src="https://via.placeholder.com/200" alt="Pasta">
-                <h3>Spaghetti Carbonara</h3>
-                <p>$12.99</p>
+            <div class="menu-item main">
+                <img src="https://images.unsplash.com/photo-1604152135912-04a022e23696?auto=format&fit=crop&w=500&q=80" alt="Pasta">
+                <h3>Italian Pasta</h3>
+                <p>Fresh pasta with creamy Alfredo sauce.</p>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <h2>About Us</h2>
-        <p>At TasteBuds, we believe food should be an experience. Our chefs use only the freshest ingredients to create mouthwatering dishes that will leave you coming back for more.</p>
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <h2>Our Ambience</h2>
+        <div class="gallery-images">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=500&q=80" alt="Cafe">
+            <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=500&q=80" alt="Table">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=500&q=80" alt="Dish">
+            <img src="https://images.unsplash.com/photo-1543353071-087092ec393e?auto=format&fit=crop&w=500&q=80" alt="Restaurant">
+        </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <section id="contact">
         <h2>Contact Us</h2>
-        <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message" required></textarea>
-            <button type="submit" class="btn">Send Message</button>
-        </form>
+        <p>Email: tastebuds@example.com</p>
+        <p>Phone: +91 9876543210</p>
     </section>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 TasteBuds Restaurant | All Rights Reserved</p>
+        <p>&copy; 2025 TasteBuds Restaurant. All Rights Reserved.</p>
     </footer>
 
     <script src="script.js"></script>
