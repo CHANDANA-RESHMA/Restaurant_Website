@@ -1,10 +1,34 @@
-function filterMenu(category) {
-    let items = document.querySelectorAll('.menu-item');
-    items.forEach(item => {
-        if (category === 'all' || item.classList.contains(category)) {
-            item.style.display = 'block';
-        } else {
-            item.style.display = 'none';
-        }
-    });
+// Menu Order Function
+function order(item) {
+    alert(`You have ordered: ${item}. Thank you for your order!`);
+}
+
+// Contact Form Submission
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    if(name && email && message) {
+        alert(`Thank you, ${name}! Your message has been sent.`);
+        document.getElementById('contactForm').reset();
+    } else {
+        alert('Please fill all fields.');
+    }
+});
+
+// Back to Top Button
+const backToTopButton = document.getElementById('backToTop');
+
+window.onscroll = function() {
+    if(document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        backToTopButton.style.display = "block";
+    } else {
+        backToTopButton.style.display = "none";
+    }
+};
+
+function scrollToTop() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
 }
